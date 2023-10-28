@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/azarov-serge/finance-manager#readme",
   "devDependencies": {
+    "@emotion/babel-plugin": "11.11.0",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
     "html-webpack-plugin": "5.5.3",
@@ -30,6 +31,9 @@
     "webpack-dev-server": "4.15.1"
   },
   "dependencies": {
+    "@emotion/css": "11.11.2",
+    "@emotion/react": "11.11.1",
+    "@emotion/styled": "11.11.0",
     "date-fns": "2.30.0",
     "react": "18.2.0",
     "react-datepicker": "4.21.0",
