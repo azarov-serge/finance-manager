@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from '@emotion/styled';
+import { useTranslation } from 'react-i18next';
+
 import { delay } from '@utils/mock';
 
 export const Wrapper = styled.div`
@@ -20,5 +22,7 @@ export const App: React.FC = () => {
 
 		void init();
 	}, []);
-	return <Wrapper>App</Wrapper>;
+
+	const { t } = useTranslation();
+	return <Wrapper>{t('financeManager')}</Wrapper>;
 };
