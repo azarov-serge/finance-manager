@@ -1,0 +1,40 @@
+{
+  "name": "finance-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "start": "webpack-dev-server --mode development --open --hot",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azarov-serge/finance-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/azarov-serge/finance-manager/issues"
+  },
+  "homepage": "https://github.com/azarov-serge/finance-manager#readme",
+  "devDependencies": {
+    "@types/react": "18.2.33",
+    "@types/react-dom": "18.2.14",
+    "html-webpack-plugin": "5.5.3",
+    "ts-loader": "9.5.0",
+    "typescript": "5.2.2",
+    "webpack": "5.89.0",
+    "webpack-cli": "5.1.4",
+    "webpack-dev-server": "4.15.1"
+  },
+  "dependencies": {
+    "date-fns": "2.30.0",
+    "react": "18.2.0",
+    "react-datepicker": "4.21.0",
+    "react-dom": "18.2.0",
+    "rechart": "0.0.1",
+    "uuid": "9.0.1"
+  }
+}
