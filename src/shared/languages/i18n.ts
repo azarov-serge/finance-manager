@@ -1,8 +1,9 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
+import { getCurrentLanguage } from '@utils/languages';
+
 import { en } from './en';
 import { ru } from './ru';
-import { getCurrentLanguage } from '@utils/languages';
 
 const currentLanguage = getCurrentLanguage();
 
