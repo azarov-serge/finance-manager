@@ -24,5 +24,8 @@ module.exports = {
 		sourceType: 'module',
 	},
 	plugins: ['react'],
-	rules: {},
+	rules: {
+		'@typescript-eslint/strict-boolean-expressions': 0,
+		'@typescript-eslint/prefer-nullish-coalescing': 0,
+	},
 };

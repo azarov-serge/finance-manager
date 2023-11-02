@@ -10,6 +10,28 @@ module.exports = {
 				use: 'ts-loader',
 				exclude: /node_modules/,
 			},
+			{
+				test: /\.inline.svg$/,
+				use: [
+					{
+						loader: '@svgr/webpack',
+						options: {
+							svgoConfig: {
+								plugins: [
+									{
+										name: 'preset-default',
+										params: {
+											overrides: {
+												removeViewBox: false,
+											},
+										},
+									},
+								],
+							},
+						},
+					},
+				],
+			},
 		],
 	},
 	resolve: {
@@ -18,6 +40,22 @@ module.exports = {
 			'@utils': path.resolve(
 				__dirname,
 				path.join('src', 'shared', 'utils'),
+			),
+			'@ui-kit': path.resolve(
+				__dirname,
+				path.join('src', 'shared', 'ui-kit'),
+			),
+			'@assets': path.resolve(
+				__dirname,
+				path.join('src', 'shared', 'assets'),
+			),
+			'@languages': path.resolve(
+				__dirname,
+				path.join('src', 'shared', 'languages'),
+			),
+			'@constants': path.resolve(
+				__dirname,
+				path.join('src', 'shared', 'constants'),
 			),
 		},
 	},

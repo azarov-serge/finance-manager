@@ -21,6 +21,7 @@
   "homepage": "https://github.com/azarov-serge/finance-manager#readme",
   "devDependencies": {
     "@emotion/babel-plugin": "11.11.0",
+    "@svgr/webpack": "8.1.0",
     "@trivago/prettier-plugin-sort-imports": "4.2.1",
     "@types/react": "18.2.33",
     "@types/react-dom": "18.2.14",
