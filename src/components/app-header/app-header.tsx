@@ -16,7 +16,7 @@ import { menuItems } from './app-header.constants';
 import type { AppHeaderProps } from './app-header.types';
 
 export const AppHeader: React.FC<AppHeaderProps> = (props) => {
-	const { themeName, onThemeClick } = props;
+	const { themeName, onThemeNameClick } = props;
 	const {
 		isMenuOpenend,
 		currentPath,
@@ -67,7 +67,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 														name === themeName
 													}
 													data-theme={name}
-													onClick={onThemeClick}
+													onClick={onThemeNameClick}
 												>
 													{themeNameToIcon[name]}
 													<Styled.ThemeName>

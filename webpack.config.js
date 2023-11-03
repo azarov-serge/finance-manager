@@ -45,6 +45,10 @@ module.exports = {
 				__dirname,
 				path.join('src', 'shared', 'ui-kit'),
 			),
+			'@components': path.resolve(
+				__dirname,
+				path.join('src', 'components'),
+			),
 			'@assets': path.resolve(
 				__dirname,
 				path.join('src', 'shared', 'assets'),

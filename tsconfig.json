@@ -33,6 +33,7 @@
 			"@utils/*": ["shared/utils/*"],
 			"@utils": ["shared/utils/index"],
 			"@ui-kit/*": ["shared/ui-kit/*"],
+			"@components/*": ["components/*"],
 			"@assets/*": ["shared/assets/*"],
 			"@languages/*": ["shared/languages/*"],
 			"@constants/*": ["shared/constants/*"]

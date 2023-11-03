@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next';
 
 import { UiKitProvider } from '@ui-kit/providers/ui-kit-provider';
 import { Title } from '@ui-kit/typography/title/title';
+import { AppFooter } from '@components/app-footer/app-footer';
+import { AppHeader } from '@components/app-header/app-header';
+import { AppContent } from '@components/app-content/app-content';
 
-import { AppFooter } from './componets/app-footer/app-footer';
-import { AppHeader } from './componets/app-header/app-header';
-import { AppContent } from './componets/app-content/app-content';
 import { useTheme } from './hooks/use-theme';
 import { Page } from '@ui-kit/page/page';
 
@@ -17,7 +17,10 @@ export const App: React.FC = () => {
 
 	return (
 		<UiKitProvider theme={theme}>
-			<AppHeader themeName={themeName} onThemeClick={handleThemeClick} />
+			<AppHeader
+				themeName={themeName}
+				onThemeNameClick={handleThemeClick}
+			/>
 			<AppContent>
 				<Page>
 					<Title symantic align="center" mb={100}>
