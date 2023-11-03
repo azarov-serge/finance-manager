@@ -1,34 +1,24 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { observer } from 'mobx-react';
 
 import { UiKitProvider } from '@ui-kit/providers/ui-kit-provider';
-import { Title } from '@ui-kit/typography/title/title';
 import { AppFooter } from '@components/app-footer/app-footer';
 import { AppHeader } from '@components/app-header/app-header';
 import { AppContent } from '@components/app-content/app-content';
 
 import { useTheme } from './hooks/use-theme';
-import { Page } from '@ui-kit/page/page';
+import { RouterProvider } from './router/router.provider';
 
-export const App: React.FC = () => {
-	const { theme, themeName, handleThemeClick } = useTheme();
-
-	const { t } = useTranslation();
+export const App: React.FC = observer(() => {
+	const { theme } = useTheme();
 
 	return (
 		<UiKitProvider theme={theme}>
-			<AppHeader
-				themeName={themeName}
-				onThemeNameClick={handleThemeClick}
-			/>
+			<AppHeader />
 			<AppContent>
-				<Page>
-					<Title symantic align="center" mb={100}>
-						{t('financeManager')}
-					</Title>
-				</Page>
+				<RouterProvider />
 			</AppContent>
 			<AppFooter />
 		</UiKitProvider>
 	);
-};
+});

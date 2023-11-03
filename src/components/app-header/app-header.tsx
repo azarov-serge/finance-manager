@@ -1,38 +1,33 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
-import {
-	THEME_NAMES,
-	themeNameToTitle,
-	themeNameToIcon,
-} from '@constants/themes';
-import { LANGUAGES, languageToTitle } from '@constants/languages';
-import LogoIcon from '@assets/logo.inline.svg';
-import BurgerMenuIcon from '@assets/burger-menu.inline.svg';
+import LogoIcon from '@assets/icons/logo.inline.svg';
+import BurgerMenuIcon from '@assets/icons/burger-menu.inline.svg';
+import { paths } from '@router/router';
 
 import { Styled } from './app-header.styled';
 import { useAppHeader } from './hooks/use-app-header';
 import { menuItems } from './app-header.constants';
 import type { AppHeaderProps } from './app-header.types';
 
-export const AppHeader: React.FC<AppHeaderProps> = (props) => {
-	const { themeName, onThemeNameClick } = props;
+export const AppHeader: React.FC<AppHeaderProps> = () => {
 	const {
 		isMenuOpenend,
 		currentPath,
-		language,
+		title,
 		handleMenuClick,
-		handleToogleLanguageClick,
+		handleMenuItemClick,
 	} = useAppHeader();
 	const { t } = useTranslation();
 
 	return (
 		<Styled.Wrapper>
 			<Styled.TitleWrapper>
-				<LogoIcon width={32} height={32} />
-				<Styled.HeaderTitle symantic level={1} align="center">
-					Title
-				</Styled.HeaderTitle>
+				<Link to={paths.home}>
+					<LogoIcon width={32} height={32} />
+				</Link>
+				<Styled.HeaderTitle>{t(title)}</Styled.HeaderTitle>
 			</Styled.TitleWrapper>
 			<Styled.ControlsWrapper>
 				<Styled.MenuWrapper isMenuOpenend={isMenuOpenend}>
@@ -44,69 +39,16 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 
 							return (
 								<Styled.MenuItem key={path} isActive={isActive}>
-									<Styled.MenuLink href={path}>
+									<Styled.MenuLink
+										to={path}
+										onClick={handleMenuItemClick}
+									>
 										{icon}
 										<span>{t(name)}</span>
 									</Styled.MenuLink>
 								</Styled.MenuItem>
 							);
 						})}
-					</Styled.Menu>
-
-					<Styled.Menu mt="auto">
-						<Styled.MenuItem align="space-between">
-							<span>{t('theme')}</span>
-							<Styled.ThemePicker
-								menu={
-									<Styled.Menu key={'theme'} height="auto">
-										{THEME_NAMES.map((name) => {
-											return (
-												<Styled.MenuItem
-													key={`theme-${name}`}
-													isActive={
-														name === themeName
-													}
-													data-theme={name}
-													onClick={onThemeNameClick}
-												>
-													{themeNameToIcon[name]}
-													<Styled.ThemeName>
-														{themeNameToTitle[name]}
-													</Styled.ThemeName>
-												</Styled.MenuItem>
-											);
-										})}
-									</Styled.Menu>
-								}
-							>
-								<span>{themeNameToIcon[themeName]}</span>
-							</Styled.ThemePicker>
-						</Styled.MenuItem>
-						<Styled.MenuItem align="space-between">
-							<span>{t('language')}</span>
-							<Styled.LanguagePicker
-								menu={
-									<Styled.Menu key={'language'} height="auto">
-										{LANGUAGES.map((lang) => {
-											return (
-												<Styled.MenuItem
-													key={`language-${lang}`}
-													isActive={lang === language}
-													data-lang={lang}
-													onClick={
-														handleToogleLanguageClick
-													}
-												>
-													{languageToTitle[lang]}
-												</Styled.MenuItem>
-											);
-										})}
-									</Styled.Menu>
-								}
-							>
-								{language}
-							</Styled.LanguagePicker>
-						</Styled.MenuItem>
 					</Styled.Menu>
 				</Styled.MenuWrapper>
 

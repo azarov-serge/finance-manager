@@ -1,10 +1,6 @@
-import type { ThemeName } from '@emotion/react';
-import type { PropsWithChildren, ReactElement, MouseEvent } from 'react';
+import type { PropsWithChildren, ReactElement } from 'react';
 
-export type AppHeaderProps = PropsWithChildren<{
-	themeName: ThemeName;
-	onThemeNameClick: (evt: MouseEvent<HTMLLIElement>) => void;
-}>;
+export type AppHeaderProps = PropsWithChildren;
 export interface MenuItem {
 	path: string;
 	name: string;

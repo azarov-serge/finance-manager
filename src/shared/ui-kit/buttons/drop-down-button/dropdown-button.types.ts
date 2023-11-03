@@ -1,5 +1,9 @@
-import type { PropsWithChildren } from 'react';
+import type { DetailedHTMLProps, HTMLAttributes } from 'react';
 
-export type DropdownButtonProps = PropsWithChildren<{
+export interface DropdownButtonProps
+	extends DetailedHTMLProps<
+		HTMLAttributes<HTMLButtonElement>,
+		HTMLButtonElement
+	> {
 	menu: JSX.Element;
-}>;
+}

@@ -1,6 +1,18 @@
 import styled from '@emotion/styled';
 import type { CSSProperties } from 'react';
 
+const viewAnimation = `
+	@keyframes opened {
+		from {
+			opacity: 0;
+		}
+
+		to {
+			opacity: 1;
+		}
+	}
+`;
+
 const ToggleButton = styled.span<{ isOpened: boolean }>((props) => {
 	const {
 		isOpened,
@@ -49,6 +61,7 @@ const DropdownButtonContentWrapper = styled.div<{
 
 	return `
 		display: ${isOpened ? 'block' : 'none'};
+		opacity: ${isOpened ? 1 : 0};
 		position: fixed;
 		top: ${contentStyle.top}px;
 		left: ${contentStyle.left}px;
@@ -63,6 +76,8 @@ const DropdownButtonContentWrapper = styled.div<{
 
 		background-color: ${colors.surface};
 		border: 1px solid ${colors.secondary};
+		animation: opened 0.3s linear;
+		${viewAnimation};
 	`;
 });
 

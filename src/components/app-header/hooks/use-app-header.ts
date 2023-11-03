@@ -1,38 +1,40 @@
 import { useState } from 'react';
-import type { MouseEvent } from 'react';
-import i18n from '@languages/i18n';
+import type { MouseEventHandler } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
+import { pathToTitle } from '../app-header.constants';
 
 export const useAppHeader = (): {
 	isMenuOpenend: boolean;
 	currentPath: string;
-	language: string;
+	title: string;
 	handleMenuClick: () => void;
-	handleToogleLanguageClick: (evt: MouseEvent<HTMLLIElement>) => void;
+	handleMenuItemClick: MouseEventHandler;
 } => {
+	const location = useLocation();
+	const navigate = useNavigate();
 	const [isMenuOpenend, setIsMenuOpenend] = useState(false);
-	const currentPath =
-		window.location.pathname === '' ? '/' : window.location.pathname;
+	const currentPath = location.pathname === '' ? '/' : location.pathname;
+	const path = currentPath.replace('/', '');
 
 	const handleMenuClick = (): void => {
 		setIsMenuOpenend(!isMenuOpenend);
 	};
 
-	const handleToogleLanguageClick = (
-		evt: MouseEvent<HTMLLIElement>,
+	const handleMenuItemClick: MouseEventHandler<HTMLAnchorElement> = (
+		evt,
 	): void => {
-		const target = evt.target as HTMLLIElement;
-		const language = target.getAttribute('data-lang');
+		evt.preventDefault();
 
-		if (language) {
-			void i18n.changeLanguage(language);
-		}
+		navigate(evt.currentTarget?.pathname);
+		setIsMenuOpenend(!isMenuOpenend);
 	};
 
 	return {
 		isMenuOpenend,
 		currentPath,
-		language: i18n.language,
+		title: path ? pathToTitle[path] || '' : pathToTitle.payments,
 		handleMenuClick,
-		handleToogleLanguageClick,
+		handleMenuItemClick,
 	};
 };

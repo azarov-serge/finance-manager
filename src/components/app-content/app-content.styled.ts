@@ -7,9 +7,8 @@ const Wrapper = styled.div((props) => {
 
 	return `
 		width: 100%;
-		height: calc(100vh - ${appHeader.height}px - ${appFooter.height}px - 25px);
+		height: calc(100vh - ${appHeader.height}px - ${appFooter.height}px - 10px);
 		margin-top: 10px;
-		margin-bottom: 15px;
 		padding: ${defaultPadding};
 
 		@media (min-width: ${size.desktopWidth}px) {
