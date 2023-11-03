@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ThemeName } from '@emotion/react';
-import DarkThemeIcon from '@ui-kit/assets/moon.inline.svg';
-import LightThemeIcon from '@ui-kit/assets/sun.inline.svg';
+import DarkThemeIcon from '@ui-kit/assets/icons/moon.inline.svg';
+import LightThemeIcon from '@ui-kit/assets/icons/sun.inline.svg';
 
 export const THEME_NAMES: ThemeName[] = ['dark', 'light'];
 

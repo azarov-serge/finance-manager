@@ -2,6 +2,7 @@
 	"plugins": [
 		[
 			"@emotion",
+			"@babel/plugin-proposal-class-properties",
 			{
 				// sourceMap is on by default but source maps are dead code eliminated in production
 				"sourceMap": true,
@@ -10,5 +11,8 @@
 				"cssPropOptimization": true
 			}
 		]
-	]
+	],
+	"assumptions": {
+		"setPublicClassFields": false
+	}
 }

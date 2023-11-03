@@ -14,36 +14,36 @@ interface StaticImageData {
 }
 
 declare module '*.png' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.jpg' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.jpeg' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.gif' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.webp' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.ico' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }
 
 declare module '*.bmp' {
-	const content: StaticImageData;
+	const content: string;
 	export default content;
 }

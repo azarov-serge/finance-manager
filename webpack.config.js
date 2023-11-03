@@ -11,6 +11,14 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
+				test: /\.(png|jpg|gif|eot|ttf|woff)$/,
+				type: 'asset/resource',
+				generator: {
+					filename: "static/[name][ext]",
+				},
+
+			},
+			{
 				test: /\.inline.svg$/,
 				use: [
 					{
@@ -45,6 +53,10 @@ module.exports = {
 				__dirname,
 				path.join('src', 'shared', 'ui-kit'),
 			),
+			'@components': path.resolve(
+				__dirname,
+				path.join('src', 'components'),
+			),
 			'@assets': path.resolve(
 				__dirname,
 				path.join('src', 'shared', 'assets'),
@@ -57,6 +69,15 @@ module.exports = {
 				__dirname,
 				path.join('src', 'shared', 'constants'),
 			),
+			'@router': path.resolve(
+				__dirname,
+				path.join('src', 'app', 'router'),
+			),
+			'@store': path.resolve(
+				__dirname,
+				path.join('src', 'app', 'store'),
+			),
+			'@pages': path.resolve(__dirname, path.join('src', 'pages')),
 		},
 	},
 	output: {

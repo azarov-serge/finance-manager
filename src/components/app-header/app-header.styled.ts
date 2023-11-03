@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
+import { Link } from 'react-router-dom';
 
 import { Button } from '@ui-kit/buttons/button/button';
 import { Title } from '@ui-kit/typography/title/title';
-import { DropdownButton } from '@ui-kit/buttons/drop-down-button/dropdown-button';
 
 const Wrapper = styled.div((props) => {
 	const {
@@ -27,12 +27,12 @@ const TitleWrapper = styled.div(() => {
 		display: flex;
 		align-items: center;
 		width: 100%;
-
-		> h1 {
-			width: 100%;
-		}
 	`;
 });
+
+const HeaderTitle = styled(Title)`
+	margin-left: 6px;
+`;
 
 const ControlsWrapper = styled.div(() => {
 	return `
@@ -42,14 +42,6 @@ const ControlsWrapper = styled.div(() => {
 
 	`;
 });
-
-const LanguagePicker = DropdownButton;
-
-const ThemePicker = DropdownButton;
-
-const ThemeName = styled.span`
-	margin-left: 5px;
-`;
 
 const BurgerMenuButton = styled(Button)<{ isMenuOpenend: boolean }>`
 	${(props) => {
@@ -138,7 +130,7 @@ const MenuItem = styled.li<{
 		min-width: 80px;
 
 		margin: 10px 0;
-		padding: 10px 0;
+		padding: 5px 0;
 
 		${isActive ? `color: ${colors.accent}` : `color: ${colors.primary}`};
 
@@ -148,7 +140,7 @@ const MenuItem = styled.li<{
 	`;
 });
 
-const MenuLink = styled.a`
+const MenuLink = styled(Link)`
 	display: flex;
 	align-items: center;
 
@@ -157,19 +149,14 @@ const MenuLink = styled.a`
 	}
 `;
 
-const HeaderTitle = styled(Title)``;
-
 export const Styled = {
 	Wrapper,
 	TitleWrapper,
+	HeaderTitle,
 	ControlsWrapper,
-	LanguagePicker,
-	ThemePicker,
-	ThemeName,
 	BurgerMenuButton,
 	MenuWrapper,
 	Menu,
 	MenuItem,
 	MenuLink,
-	HeaderTitle,
 };
