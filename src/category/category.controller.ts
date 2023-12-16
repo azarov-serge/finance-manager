@@ -8,8 +8,12 @@ import {
 	Param,
 	Patch,
 	Post,
+	UseGuards,
 } from '@nestjs/common';
 import { Category } from '@prisma/client';
+
+import { AccessTokenGuard } from '@common/guards/access-token.guard';
+
 import { CategoryService } from './category.service';
 import { CATEGORY_NOT_FOUND } from './category.constants';
 
@@ -17,6 +21,7 @@ import { CATEGORY_NOT_FOUND } from './category.constants';
 export class CategoryController {
 	constructor(private readonly categoryService: CategoryService) {}
 
+	@UseGuards(AccessTokenGuard)
 	@Post('create')
 	async create(@Body() dto: Omit<Category, 'id'>): Promise<Category> {
 		try {
@@ -28,6 +33,7 @@ export class CategoryController {
 		}
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Patch('update')
 	async update(@Body() dto: Category): Promise<Category> {
 		try {
@@ -47,6 +53,7 @@ export class CategoryController {
 		}
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Get(':id')
 	async get(@Param('id') id: string): Promise<Category> {
 		try {
@@ -66,7 +73,8 @@ export class CategoryController {
 		}
 	}
 
-	@Get('getList/:userId')
+	@UseGuards(AccessTokenGuard)
+	@Get('get-list/:userId')
 	async getList(@Param('userId') userId: string): Promise<Category[]> {
 		try {
 			const categorys = await this.categoryService.getList(userId);
@@ -77,6 +85,7 @@ export class CategoryController {
 		}
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Delete(':id')
 	async delete(@Param('id') id: string): Promise<boolean> {
 		try {

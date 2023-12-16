@@ -8,8 +8,10 @@ import {
 	Post,
 	NotFoundException,
 	InternalServerErrorException,
+	UseGuards,
 } from '@nestjs/common';
 import { Transaction } from '@prisma/client';
+import { AccessTokenGuard } from '@common/guards/access-token.guard';
 
 import { TRANSACTION_NOT_FOUND } from './transaction.constants';
 import { TransactionService } from './transaction.service';
@@ -18,6 +20,7 @@ import { TransactionService } from './transaction.service';
 export class TransactionController {
 	constructor(private readonly transactionService: TransactionService) {}
 
+	@UseGuards(AccessTokenGuard)
 	@Post('create')
 	async create(@Body() dto: Omit<Transaction, 'id'>): Promise<Transaction> {
 		try {
@@ -29,6 +32,7 @@ export class TransactionController {
 		}
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Patch('update')
 	async update(@Body() dto: Transaction): Promise<Transaction> {
 		try {
@@ -47,7 +51,7 @@ export class TransactionController {
 			throw new InternalServerErrorException(error?.message || `${error}`);
 		}
 	}
-
+	@UseGuards(AccessTokenGuard)
 	@Get(':id')
 	async get(@Param('id') id: string): Promise<Transaction> {
 		try {
@@ -67,7 +71,8 @@ export class TransactionController {
 		}
 	}
 
-	@Get('getList/:userId')
+	@UseGuards(AccessTokenGuard)
+	@Get('get-list/:userId')
 	async getList(@Param('userId') userId: string): Promise<Transaction[]> {
 		try {
 			const transactions = await this.transactionService.getList(userId);
@@ -78,6 +83,7 @@ export class TransactionController {
 		}
 	}
 
+	@UseGuards(AccessTokenGuard)
 	@Delete(':id')
 	async delete(@Param('id') id: string): Promise<boolean> {
 		try {

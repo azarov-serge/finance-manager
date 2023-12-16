@@ -2,6 +2,8 @@ import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { genSalt, hash, compare } from 'bcryptjs';
+import { User } from '@prisma/client';
+
 import { PrismaService } from '../common/prisma/prisma.service';
 
 import { JwtPayload } from './strategies/access-token.strategy';
@@ -22,7 +24,7 @@ export class AuthService {
 		private readonly prisma: PrismaService,
 	) {}
 
-	async signUp(dto: AuthDto): Promise<ITokens> {
+	async signUp(dto: AuthDto): Promise<User> {
 		const userExists = await this.prisma.user.findFirst({
 			where: {
 				login: dto.login,
@@ -47,7 +49,10 @@ export class AuthService {
 
 		await this.updateRefreshToken(user.id, tokens.refreshToken);
 
-		return tokens;
+		return {
+			...user,
+			...tokens,
+		};
 	}
 
 	async signIn(dto: AuthDto): Promise<ITokens> {
@@ -84,7 +89,7 @@ export class AuthService {
 	}
 
 	generateTokens(payload: JwtPayload): ITokens {
-		const accessToken = this.jwtService.sign(payload, { expiresIn: '15m' });
+		const accessToken = this.jwtService.sign(payload, { expiresIn: '1h' });
 		const refreshToken = this.jwtService.sign(payload, {
 			expiresIn: '30d',
 			secret: this.configService.get('JWT_REFRESH_SECRET'),
@@ -98,10 +103,13 @@ export class AuthService {
 
 	async refreshTokens(refreshToken: string) {
 		const userData = this.validateRefreshToken(refreshToken);
+
 		if (!userData) {
 			throw new UnauthorizedException('Пользователь не авторизован.');
 		}
+
 		const tokens = this.generateTokens({ id: userData.id });
+
 		await this.updateRefreshToken(userData.id, tokens.refreshToken);
 		return tokens;
 	}
