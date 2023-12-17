@@ -1,5 +1,19 @@
 # API for Finance Manager
 
+## v1.0.2
+
+Релализованы сервисы:
+
+-   test
+    -   check (протестировать, что server поднят)
+-   category (CRUD)
+-   translation (CRUD)
+-   auth
+    -   sign-up
+    -   sign-in
+    -   sign-out
+    -   refresh-token
+
 ## .env
 
 ```env
@@ -12,11 +26,4 @@ DATABASE_URL="postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@localhost:5432/
 # JWT
 JWT_ACCESS_SECRET="JWT_ACCESS_SECRET"
 JWT_REFRESH_SECRET="JWT_REFRESH_SECRET"
-```
-
-## Prisma
-
-```sh
-cd ./prisma
-npx prisma db push --schema='./schema.prisma'
 ```
