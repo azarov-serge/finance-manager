@@ -9,6 +9,8 @@ import {
 	Patch,
 	Post,
 	UseGuards,
+	UsePipes,
+	ValidationPipe,
 } from '@nestjs/common';
 import { Category } from '@prisma/client';
 
@@ -16,14 +18,16 @@ import { AccessTokenGuard } from '@common/guards/access-token.guard';
 
 import { CategoryService } from './category.service';
 import { CATEGORY_NOT_FOUND } from './category.constants';
+import { CategoryDto, NewCategoryDto } from './dto/category.dto';
 
 @Controller('category')
 export class CategoryController {
 	constructor(private readonly categoryService: CategoryService) {}
 
+	@UsePipes(new ValidationPipe())
 	@UseGuards(AccessTokenGuard)
 	@Post('create')
-	async create(@Body() dto: Omit<Category, 'id'>): Promise<Category> {
+	async create(@Body() dto: NewCategoryDto): Promise<Category> {
 		try {
 			const category = await this.categoryService.create(dto);
 
@@ -33,9 +37,10 @@ export class CategoryController {
 		}
 	}
 
+	@UsePipes(new ValidationPipe())
 	@UseGuards(AccessTokenGuard)
 	@Patch('update')
-	async update(@Body() dto: Category): Promise<Category> {
+	async update(@Body() dto: CategoryDto): Promise<Category> {
 		try {
 			const category = this.categoryService.findById(dto.id);
 
