@@ -1,16 +1,16 @@
 # API for Finance Manager
 
-## v1.0.2
+## v1.0.3
 
 Релализованы сервисы:
 
 -   test
     -   check (протестировать, что server поднят)
--   category (CRUD)
--   translation (CRUD)
+-   category (CRUD) (валидация входных данных)
+-   translation (CRUD) (валидация входных данных)
 -   auth
-    -   sign-up
-    -   sign-in
+    -   sign-up (валидация входных данных)
+    -   sign-in (валидация входных данных)
     -   sign-out
     -   refresh-token
 

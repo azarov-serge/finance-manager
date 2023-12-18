@@ -9,20 +9,24 @@ import {
 	NotFoundException,
 	InternalServerErrorException,
 	UseGuards,
+	UsePipes,
+	ValidationPipe,
 } from '@nestjs/common';
 import { Transaction } from '@prisma/client';
 import { AccessTokenGuard } from '@common/guards/access-token.guard';
 
 import { TRANSACTION_NOT_FOUND } from './transaction.constants';
 import { TransactionService } from './transaction.service';
+import { TransactionDto, NewTransactionDto } from './dto/transaction.dto';
 
 @Controller('transaction')
 export class TransactionController {
 	constructor(private readonly transactionService: TransactionService) {}
 
+	@UsePipes(new ValidationPipe())
 	@UseGuards(AccessTokenGuard)
 	@Post('create')
-	async create(@Body() dto: Omit<Transaction, 'id'>): Promise<Transaction> {
+	async create(@Body() dto: NewTransactionDto): Promise<Transaction> {
 		try {
 			const transaction = await this.transactionService.create(dto);
 
@@ -32,9 +36,10 @@ export class TransactionController {
 		}
 	}
 
+	@UsePipes(new ValidationPipe())
 	@UseGuards(AccessTokenGuard)
 	@Patch('update')
-	async update(@Body() dto: Transaction): Promise<Transaction> {
+	async update(@Body() dto: TransactionDto): Promise<Transaction> {
 		try {
 			const transaction = this.transactionService.findById(dto.id);
 

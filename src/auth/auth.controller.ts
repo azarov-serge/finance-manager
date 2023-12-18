@@ -5,6 +5,8 @@ import {
 	InternalServerErrorException,
 	UseGuards,
 	Req,
+	UsePipes,
+	ValidationPipe,
 } from '@nestjs/common';
 import { Request } from 'express';
 
@@ -21,6 +23,7 @@ import { RefreshTokenGuard } from '@common/guards/refresh-token.guard';
 export class AuthController {
 	constructor(private readonly authService: AuthService) {}
 
+	@UsePipes(new ValidationPipe())
 	@Post('sign-in')
 	async signIn(@Body() dto: AuthDto): Promise<ITokens> {
 		try {
@@ -30,6 +33,7 @@ export class AuthController {
 		}
 	}
 
+	@UsePipes(new ValidationPipe())
 	@Post('sign-up')
 	async signUp(@Body() dto: AuthDto): Promise<User> {
 		try {
