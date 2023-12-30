@@ -14,7 +14,7 @@ export const useApp = (): { isAuth: boolean | null } => {
 			navigate('/');
 		}
 	}, [authStore.isAuth]);
-
+	//
 	return {
 		isAuth: authStore.isAuth,
 	};
