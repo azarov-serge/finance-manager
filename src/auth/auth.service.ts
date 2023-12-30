@@ -24,7 +24,9 @@ export class AuthService {
 		private readonly prisma: PrismaService,
 	) {}
 
-	async signUp(dto: AuthDto): Promise<User> {
+	async signUp(
+		dto: AuthDto,
+	): Promise<{ user: Omit<User, 'passwordHash' | 'refreshToken'>; tokens: ITokens }> {
 		const userExists = await this.prisma.user.findFirst({
 			where: {
 				login: dto.login,
@@ -44,18 +46,22 @@ export class AuthService {
 		};
 
 		const user = await this.prisma.user.create({ data });
+		delete user.passwordHash;
+		delete user.refreshToken;
 
 		const tokens = await this.generateTokens({ id: user.id });
 
 		await this.updateRefreshToken(user.id, tokens.refreshToken);
 
 		return {
-			...user,
-			...tokens,
+			user,
+			tokens,
 		};
 	}
 
-	async signIn(dto: AuthDto): Promise<ITokens> {
+	async signIn(
+		dto: AuthDto,
+	): Promise<{ user: Omit<User, 'passwordHash' | 'refreshToken'>; tokens: ITokens }> {
 		const user = await this.prisma.user.findUnique({
 			where: { login: dto.login },
 		});
@@ -70,9 +76,13 @@ export class AuthService {
 		}
 
 		const tokens = await this.generateTokens({ id: user.id });
+
 		await this.updateRefreshToken(user.id, tokens.refreshToken);
 
-		return tokens;
+		delete user.passwordHash;
+		delete user.refreshToken;
+
+		return { user, tokens };
 	}
 
 	async signOut(userId: string): Promise<boolean> {
@@ -105,7 +115,7 @@ export class AuthService {
 		const userData = this.validateRefreshToken(refreshToken);
 
 		if (!userData) {
-			throw new UnauthorizedException('Пользователь не авторизован.');
+			throw new BadRequestException('Пользователь не авторизован.');
 		}
 
 		const tokens = this.generateTokens({ id: userData.id });
