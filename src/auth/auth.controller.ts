@@ -1,8 +1,8 @@
 import {
 	Body,
 	Controller,
+	Get,
 	Post,
-	InternalServerErrorException,
 	UseGuards,
 	Req,
 	UsePipes,
@@ -25,41 +25,29 @@ export class AuthController {
 
 	@UsePipes(new ValidationPipe())
 	@Post('sign-in')
-	async signIn(@Body() dto: AuthDto): Promise<ITokens> {
-		try {
-			return await this.authService.signIn(dto);
-		} catch (error: any) {
-			throw new InternalServerErrorException(error?.message || `${error}`);
-		}
+	async signIn(
+		@Body() dto: AuthDto,
+	): Promise<{ user: Omit<User, 'passwordHash' | 'refreshToken'>; tokens: ITokens }> {
+		return await this.authService.signIn(dto);
 	}
 
 	@UsePipes(new ValidationPipe())
 	@Post('sign-up')
-	async signUp(@Body() dto: AuthDto): Promise<User> {
-		try {
-			return await this.authService.signUp(dto);
-		} catch (error: any) {
-			throw new InternalServerErrorException(error?.message || `${error}`);
-		}
+	async signUp(
+		@Body() dto: AuthDto,
+	): Promise<{ user: Omit<User, 'passwordHash' | 'refreshToken'>; tokens: ITokens }> {
+		return await this.authService.signUp(dto);
 	}
 
 	@UseGuards(AccessTokenGuard)
 	@Post('sign-out')
 	async signOut(@Body('userId') userId: string): Promise<void> {
-		try {
-			await this.authService.signOut(userId);
-		} catch (error: any) {
-			throw new InternalServerErrorException(error?.message || `${error}`);
-		}
+		await this.authService.signOut(userId);
 	}
 
 	@UseGuards(RefreshTokenGuard)
-	@Post('refresh-token')
+	@Get('refresh-token')
 	async refreshToken(@Req() req: Request): Promise<any> {
-		try {
-			return this.authService.refreshTokens(req['user']?.refreshToken);
-		} catch (error: any) {
-			throw new InternalServerErrorException(error?.message || `${error}`);
-		}
+		return this.authService.refreshTokens(req['user']?.refreshToken);
 	}
 }
