@@ -5,8 +5,8 @@ import { Portal } from '../../base/portal/portal';
 import ToggleIcon from '../../assets/icons/chevron-down.inline.svg';
 
 import { useDropdownButton } from './hooks/use-dropdown-button';
-import { Styled } from './dropdown-button.styled';
-import type { DropdownButtonProps } from './dropdown-button.types';
+import { Styled } from './styled';
+import type { DropdownButtonProps } from './types';
 
 export const DropdownButton: React.FC<DropdownButtonProps> = (props) => {
 	const { menu, className, children } = props;

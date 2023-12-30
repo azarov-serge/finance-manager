@@ -1,7 +1,11 @@
-import React from 'react';
-import type { PropsWithChildren } from 'react';
-import { Styled } from './app-content.styled';
+import React, { type PropsWithChildren } from 'react';
 
-export const AppContent: React.FC<PropsWithChildren> = (props) => {
-	return <Styled.Wrapper>{props.children}</Styled.Wrapper>;
+import { Styled } from './styled';
+
+export const AppContent: React.FC<PropsWithChildren<{ isAuth: boolean }>> = (
+	props,
+) => {
+	return (
+		<Styled.Wrapper isAuth={props.isAuth}>{props.children}</Styled.Wrapper>
+	);
 };

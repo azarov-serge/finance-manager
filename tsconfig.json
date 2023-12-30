@@ -30,6 +30,7 @@
 		"moduleResolution": "Node" /* Specify how TypeScript looks up a file from a given module specifier. */,
 		"baseUrl": "./src" /* Specify the base directory to resolve non-relative module names. */,
 		"paths": {
+			"@entites": ["entites/index"],
 			"@utils/*": ["shared/utils/*"],
 			"@utils": ["shared/utils/index"],
 			"@ui-kit/*": ["shared/ui-kit/*"],
@@ -37,7 +38,9 @@
 			"@assets/*": ["shared/assets/*"],
 			"@languages/*": ["shared/languages/*"],
 			"@constants/*": ["shared/constants/*"],
+			"@hooks": ["hooks/index"],
 			"@router/*": ["app/router/*"],
+			"@store": ["app/store/index"],
 			"@store/*": ["app/store/*"],
 			"@pages/*": ["pages/*"]
 		} /* Specify a set of entries that re-map imports to additional lookup locations. */,

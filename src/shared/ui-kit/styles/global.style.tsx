@@ -25,10 +25,21 @@ export const GlobalStyle: React.FC = () => {
 				}
 
 				button {
+					font-size: 12px;
+
 					cursor: pointer;
 					padding: 4px 8px;
 					background: ${theme.colors.secondary};
 					border-radius: ${theme.borderRadius}px;
+				}
+
+				input {
+					height: 30px;
+					padding: 4px 8px;
+					background: ${theme.colors.input};
+					border: 1px solid ${theme.colors.border};
+					border-radius: ${theme.borderRadius}px;
+					color: ${theme.colors.text};
 				}
 
 				h1,

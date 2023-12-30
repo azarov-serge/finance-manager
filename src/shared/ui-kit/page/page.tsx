@@ -1,7 +1,6 @@
-import React from 'react';
-import type { DetailedHTMLProps, HTMLAttributes } from 'react';
+import React, { type DetailedHTMLProps, type HTMLAttributes } from 'react';
 
-import { Styled } from './page.styled';
+import { Styled } from './styled';
 
 export const Page: React.FC<
 	DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>

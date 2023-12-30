@@ -3,7 +3,7 @@ import type { Theme } from '@emotion/react';
 import { colors } from './colors';
 
 export const button: Theme['button'] = {
-	primary: colors.accent,
+	primary: colors.primary,
 	secondary: colors.secondary,
 	danger: colors.danger,
 	caption: {

@@ -1,7 +1,9 @@
 import React from 'react';
+
 import notFoundUrl from '@assets/img/404.png';
-import { Styled } from './not-found-page.styled';
 import { Title } from '@ui-kit/typography/title/title';
+
+import { Styled } from './styled';
 
 export const NotFoundPage: React.FC = () => {
 	return (

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Styled } from './title.styled';
-import type { TitleProps } from './title.types';
+import { Styled } from './styled';
+import type { TitleProps } from './types';
 
 export const Title: React.FC<TitleProps> = (props) => {
 	const {

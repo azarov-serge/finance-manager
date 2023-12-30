@@ -6,5 +6,12 @@ export const en = {
 		settings: 'Settings',
 		theme: 'Theme',
 		language: 'Language',
+		signIn: 'Sign in',
+		signInTo: 'Sign in to',
+		signUp: 'Sign up',
+		login: 'Login',
+		password: 'Password',
+		repeatPassword: 'Repeat password',
+		sending: 'Sending',
 	},
 };

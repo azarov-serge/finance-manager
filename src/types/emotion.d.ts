@@ -28,12 +28,12 @@ declare module '@emotion/react' {
 		colors: {
 			primary: Color;
 			secondary: Color;
-			accent: Color;
 			background: Color;
 			surface: Color;
 			danger: Color;
 			border: Color;
 			text: Color;
+			input: Color;
 		};
 		typography: {
 			text: TextTheme;

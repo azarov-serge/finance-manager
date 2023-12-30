@@ -16,6 +16,5 @@ createRoot(root).render(
 		<MOBXProvider {...store}>
 			<App />
 		</MOBXProvider>
-		,
 	</BrowserRouter>,
 );

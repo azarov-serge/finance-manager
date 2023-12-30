@@ -4,10 +4,7 @@ import { ThemeProvider } from '@emotion/react';
 import { DEFAULT_THEME_NAME, themes } from '../themes';
 import { GlobalStyle } from '../styles/global.style';
 
-import type {
-	UiKitContextProps,
-	UiKitProviderProps,
-} from './ui-kit.provider.types';
+import type { UiKitContextProps, UiKitProviderProps } from './types';
 
 const UiKitContext = createContext<UiKitContextProps>({
 	theme: themes[DEFAULT_THEME_NAME],

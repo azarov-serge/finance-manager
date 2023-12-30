@@ -1,4 +1,4 @@
-declare module '*.svg' {
+declare module '*.inline.svg' {
 	const content: React.FunctionComponent<React.SVGAttributes<SVGAElement>>;
 	export default content;
 }
@@ -11,6 +11,11 @@ interface StaticImageData {
 	height: number;
 	width: number;
 	placeholder?: string;
+}
+
+declare module '*.img.svg' {
+	const content: string;
+	export default content;
 }
 
 declare module '*.png' {

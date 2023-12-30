@@ -5,20 +5,30 @@ import { Link } from 'react-router-dom';
 import LogoIcon from '@assets/icons/logo.inline.svg';
 import BurgerMenuIcon from '@assets/icons/burger-menu.inline.svg';
 import { paths } from '@router/router';
+import {
+	THEME_NAMES,
+	themeNameToTitle,
+	themeNameToIcon,
+} from '@constants/themes';
+import { LANGUAGES, languageToTitle } from '@constants/languages';
 
-import { Styled } from './app-header.styled';
+import { Styled } from './styled';
 import { useAppHeader } from './hooks/use-app-header';
-import { menuItems } from './app-header.constants';
-import type { AppHeaderProps } from './app-header.types';
+import { menuItems } from './constants';
+import type { AppHeaderProps } from './types';
 
-export const AppHeader: React.FC<AppHeaderProps> = () => {
+export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 	const {
 		isMenuOpenend,
 		currentPath,
 		title,
 		handleMenuClick,
 		handleMenuItemClick,
-	} = useAppHeader();
+		themeName,
+		language,
+		handleThemeClick,
+		handleToogleLanguageClick,
+	} = useAppHeader(props);
 	const { t } = useTranslation();
 
 	return (
@@ -31,24 +41,108 @@ export const AppHeader: React.FC<AppHeaderProps> = () => {
 			</Styled.TitleWrapper>
 			<Styled.ControlsWrapper>
 				<Styled.MenuWrapper isMenuOpenend={isMenuOpenend}>
-					<Styled.Menu>
-						{menuItems.map(({ path, name, icon }) => {
-							const isActive =
-								currentPath.replace('/', '') ===
-								path.replace('/', '');
+					{props.isAuth && (
+						<Styled.Menu>
+							{menuItems.map(({ path, name, icon }) => {
+								const isActive =
+									currentPath.replace('/', '') ===
+									path.replace('/', '');
 
-							return (
-								<Styled.MenuItem key={path} isActive={isActive}>
-									<Styled.MenuLink
-										to={path}
-										onClick={handleMenuItemClick}
+								return (
+									<Styled.MenuItem
+										key={path}
+										isActive={isActive}
 									>
-										{icon}
-										<span>{t(name)}</span>
-									</Styled.MenuLink>
-								</Styled.MenuItem>
-							);
-						})}
+										<Styled.MenuLink
+											to={path}
+											onClick={handleMenuItemClick}
+										>
+											{icon}
+											<span>{t(name)}</span>
+										</Styled.MenuLink>
+									</Styled.MenuItem>
+								);
+							})}
+						</Styled.Menu>
+					)}
+
+					<Styled.Menu isTop={!props.isAuth} height="auto">
+						<Styled.MenuItem
+							align="space-between"
+							width="100%"
+							isTop={!props.isAuth}
+						>
+							<Styled.MenuLabel isTop={!props.isAuth}>
+								{t('theme')}
+							</Styled.MenuLabel>
+							<Styled.ThemePicker
+								menu={
+									<Styled.Menu key={'theme'} height="auto">
+										{THEME_NAMES.map((name) => {
+											return (
+												<Styled.MenuItem
+													key={`theme-${name}`}
+													isActive={
+														name === themeName
+													}
+													data-theme={name}
+													onClick={handleThemeClick}
+												>
+													{themeNameToIcon[name]}
+													<Styled.ThemeName>
+														{themeNameToTitle[name]}
+													</Styled.ThemeName>
+												</Styled.MenuItem>
+											);
+										})}
+									</Styled.Menu>
+								}
+							>
+								<Styled.Label>
+									{themeNameToIcon[themeName]}
+									<Styled.ThemeName>
+										{themeNameToTitle[themeName]}
+									</Styled.ThemeName>
+								</Styled.Label>
+							</Styled.ThemePicker>
+						</Styled.MenuItem>
+						<Styled.MenuItem
+							align="space-between"
+							width="100%"
+							isTop={!props.isAuth}
+						>
+							<Styled.MenuLabel isTop={!props.isAuth}>
+								{t('language')}
+							</Styled.MenuLabel>
+							<Styled.LanguagePicker
+								menu={
+									<Styled.Menu key={'language'} height="auto">
+										{LANGUAGES.map((lang) => {
+											return (
+												<Styled.MenuItem
+													key={`language-${lang}`}
+													isActive={lang === language}
+													data-lang={lang}
+													onClick={
+														handleToogleLanguageClick
+													}
+												>
+													{languageToTitle[lang]}
+												</Styled.MenuItem>
+											);
+										})}
+									</Styled.Menu>
+								}
+							>
+								<Styled.Label>
+									{
+										languageToTitle[
+											language as (typeof LANGUAGES)[number]
+										]
+									}
+								</Styled.Label>
+							</Styled.LanguagePicker>
+						</Styled.MenuItem>
 					</Styled.Menu>
 				</Styled.MenuWrapper>
 
