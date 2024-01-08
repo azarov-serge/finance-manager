@@ -3,6 +3,7 @@ import type { AxiosRequestConfig } from 'axios';
 
 import { axiosInstance } from '@utils/axios-instance';
 import { ResponseError } from '@utils/response-error';
+import { type ThunkDispatch } from '@reduxjs/toolkit';
 
 export type AxiosQueryFn = BaseQueryFn<
 	{
@@ -13,7 +14,16 @@ export type AxiosQueryFn = BaseQueryFn<
 		headers?: AxiosRequestConfig['headers'];
 		adaptResponse?: (response: any) => unknown;
 	},
-	unknown,
+	{
+		signal: AbortSignal;
+		abort: (reason?: string) => void;
+		dispatch: ThunkDispatch<any, any, any>;
+		getState: () => unknown;
+		extra: unknown;
+		endpoint: string;
+		type: 'query' | 'mutation';
+		forced?: boolean;
+	},
 	unknown
 >;
 
