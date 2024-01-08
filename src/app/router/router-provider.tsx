@@ -1,11 +1,10 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { observer } from 'mobx-react';
 
 import { commonRoutes, commonPaths, router, authRouter } from './router';
 import { PrivateRoute } from './private-route';
 
-export const RouterProvider: React.FC = observer(() => {
+export const RouterProvider: React.FC = () => {
 	return (
 		<Routes>
 			{authRouter.map((route) => {
@@ -35,4 +34,4 @@ export const RouterProvider: React.FC = observer(() => {
 			/>
 		</Routes>
 	);
-});
+};

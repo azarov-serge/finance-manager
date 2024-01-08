@@ -1,21 +1,22 @@
 import { useEffect } from 'react';
-import { authStore } from '@store/views';
+
 import { useLocation, useNavigate } from 'react-router-dom';
+import { useIsAuth, useRefreshToken } from '@hooks';
 
 export const useApp = (): { isAuth: boolean | null } => {
 	const location = useLocation();
 	const navigate = useNavigate();
-	useEffect(() => {
-		authStore.checkAuth();
-	}, []);
+	const { isAuth } = useIsAuth();
+
+	useRefreshToken();
 
 	useEffect(() => {
-		if (location.pathname.includes('/sign-') && authStore.isAuth) {
+		if (isAuth && location.pathname.includes('/sign-')) {
 			navigate('/');
 		}
-	}, [authStore.isAuth]);
-	//
+	}, [isAuth]);
+
 	return {
-		isAuth: authStore.isAuth,
+		isAuth,
 	};
 };

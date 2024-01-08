@@ -59,9 +59,9 @@ module.exports = (env, argv) => {
 		resolve: {
 			extensions: ['.tsx', '.ts', '.js'],
 			alias: {
-				'@entites': path.resolve(
+				'@entities': path.resolve(
 					__dirname,
-					path.join('src', 'entites'),
+					path.join('src', 'entities'),
 				),
 				'@utils': path.resolve(
 					__dirname,
@@ -89,7 +89,7 @@ module.exports = (env, argv) => {
 				),
 				'@hooks': path.resolve(
 					__dirname,
-					path.join('src', 'hooks'),
+					path.join('src', 'shared', 'hooks'),
 				),
 				'@router': path.resolve(
 					__dirname,

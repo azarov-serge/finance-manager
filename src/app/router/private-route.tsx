@@ -1,15 +1,13 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useIsAuth } from '@hooks';
 
-import { observer } from 'mobx-react-lite';
-import { store } from '@store';
+export const PrivateRoute: React.FC = () => {
+	const { isAuth } = useIsAuth();
 
-export const PrivateRoute: React.FC = observer(() => {
-	const { authStore } = store;
-
-	if (authStore.isAuth) {
+	if (isAuth) {
 		return <Outlet />;
 	}
 
 	return <Navigate to="/sign-in" />;
-});
+};
