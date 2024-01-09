@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { useUser, useIsAuth } from '@hooks';
@@ -31,12 +31,12 @@ export const useSignIn = (): {
 		navigate('/');
 	}, [data]);
 
-	const handleSignIn = useCallback(
-		async (data: { login: string; password: string }) => {
-			await signIn(data);
-		},
-		[],
-	);
+	const handleSignIn = async (data: {
+		login: string;
+		password: string;
+	}): Promise<void> => {
+		await signIn(data);
+	};
 
 	return {
 		isLoading,

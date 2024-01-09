@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { type ThemeName } from '@emotion/react';
 
 import { useAppDispatch, useAppSelector } from '@hooks';
@@ -12,11 +12,11 @@ export const useThemeName = (): {
 } => {
 	const dispatch = useAppDispatch();
 	const themeName = useAppSelector(settingsSelectors.getThemeName);
-	const setThemeName = useCallback((themeName: ThemeName) => {
+	const setThemeName = (themeName: ThemeName): void => {
 		CookiesManager.setThemeName(themeName);
 
 		dispatch(settingsActions.setThemeName(themeName));
-	}, []);
+	};
 
 	useEffect(() => {
 		const cachedThemeName = CookiesManager.getThemeName();
