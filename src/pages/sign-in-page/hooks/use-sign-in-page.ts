@@ -1,4 +1,4 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { type FormikProps, useFormik } from 'formik';
@@ -21,22 +21,20 @@ export const useSignInPage = (): UseSignIn => {
 	const { t } = useTranslation();
 	const { isLoading, error, signIn } = useSignIn();
 
-	const validate = useCallback(
-		(values: AudthData): Record<string, string> => {
-			const errors: Record<string, string> = {};
+	const validate = (values: AudthData): Record<string, string> => {
+		const errors: Record<string, string> = {};
 
-			if (values.password.length < MIN_PASSWORD_LENGTH) {
-				errors.password = `${t('password')} < ${MIN_PASSWORD_LENGTH}`;
-			}
+		if (values.password.length < MIN_PASSWORD_LENGTH) {
+			errors.password = `${t('password')} < ${MIN_PASSWORD_LENGTH}`;
+		}
 
-			return errors;
-		},
-		[],
-	);
+		return errors;
+	};
 
-	const onSubmit = useCallback((data: SignInData) => {
+	const onSubmit = (data: SignInData): void => {
 		signIn(data);
-	}, []);
+	};
+
 	const formik: FormikProps<SignInData> = useFormik<SignInData>({
 		initialValues: {
 			login: '',
