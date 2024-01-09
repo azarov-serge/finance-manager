@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { userActions, userSelectors } from '@store';
@@ -11,11 +11,12 @@ export const useUser = (): {
 } => {
 	const dispatch = useAppDispatch();
 	const user = useAppSelector(userSelectors.getUser);
-	const setUser = (user: UserEntity | null): void => {
+
+	const setUser = useCallback((user: UserEntity | null): void => {
 		CookiesManager.setUser(user);
 
 		dispatch(userActions.setUser(user));
-	};
+	}, []);
 
 	useEffect(() => {
 		const user = CookiesManager.getUser();

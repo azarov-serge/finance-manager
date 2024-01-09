@@ -13,5 +13,6 @@ export const en = {
 		password: 'Password',
 		repeatPassword: 'Repeat password',
 		sending: 'Sending',
+		categories: 'Categories',
 	},
 };

@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@hooks';
 import { settingsActions, settingsSelectors } from '@store';
@@ -12,12 +12,12 @@ export const useLanguage = (): {
 } => {
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(settingsSelectors.getLanguage);
-	const setLanguage = (language: string): void => {
+	const setLanguage = useCallback((language: string): void => {
 		i18n.changeLanguage(language);
 		CookiesManager.setLanguage(language);
 
 		dispatch(settingsActions.setLanguage(language));
-	};
+	}, []);
 
 	useEffect(() => {
 		const cachedLanguage = CookiesManager.getLanguage();
