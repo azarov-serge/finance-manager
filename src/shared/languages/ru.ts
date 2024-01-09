@@ -13,5 +13,6 @@ export const ru = {
 		password: 'Пароль',
 		repeatPassword: 'Повторите пароль',
 		sending: 'Отправка',
+		categories: 'Категории',
 	},
 };

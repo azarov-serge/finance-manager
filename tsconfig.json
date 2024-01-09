@@ -39,6 +39,7 @@
 			"@languages/*": ["shared/languages/*"],
 			"@constants/*": ["shared/constants/*"],
 			"@hooks": ["shared/hooks/index"],
+			"@hooks/*": ["shared/hooks/*"],
 			"@router/*": ["app/router/*"],
 			"@store": ["app/store/index"],
 			"@store/*": ["app/store/*"],

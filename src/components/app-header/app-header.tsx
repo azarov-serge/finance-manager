@@ -37,7 +37,9 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 				<Link to={paths.home}>
 					<LogoIcon width={32} height={32} />
 				</Link>
-				<Styled.HeaderTitle>{t(title)}</Styled.HeaderTitle>
+				<Styled.HeaderTitle level={1} symantic>
+					{t(title)}
+				</Styled.HeaderTitle>
 			</Styled.TitleWrapper>
 			<Styled.ControlsWrapper>
 				<Styled.MenuWrapper isMenuOpenend={isMenuOpenend}>

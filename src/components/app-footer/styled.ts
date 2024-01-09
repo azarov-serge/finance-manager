@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Wrapper = styled.div((props) => {
+const Wrapper = styled.footer((props) => {
 	const {
 		theme: { defaultPadding, appFooter },
 	} = props;

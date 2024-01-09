@@ -18,30 +18,42 @@ export const categoryApi = createApi({
 						? respone.map(CategoryEntity.fromJson)
 						: [],
 			}),
-			providesTags: (result) => ['Category'],
+			providesTags: (result) =>
+				result
+					? [
+							...result.map(({ id }) => ({
+								type: 'Category' as const,
+								id,
+							})),
+							{ type: 'Category', id: 'LIST' },
+					  ]
+					: [{ type: 'Category', id: 'LIST' }],
 		}),
-		createPost: build.mutation<CategoryEntity, CategoryEntity>({
-			query: (post) => ({
-				url: `/`,
+		createItem: build.mutation<
+			CategoryEntity,
+			{ name: string; userId: string }
+		>({
+			query: (data) => ({
+				url: ``,
 				method: 'POST',
-				body: post,
+				data,
 			}),
-			invalidatesTags: ['Category'],
+			invalidatesTags: [{ type: 'Category', id: 'LIST' }],
 		}),
-		updatePost: build.mutation<CategoryEntity, CategoryEntity>({
-			query: (post) => ({
-				url: `/`,
+		updateItem: build.mutation<CategoryEntity, CategoryEntity>({
+			query: (category) => ({
+				url: ``,
 				method: 'PATCH',
-				body: post,
+				data: category.toJson(),
 			}),
-			invalidatesTags: ['Category'],
+			invalidatesTags: [{ type: 'Category', id: 'LIST' }],
 		}),
-		deletePost: build.mutation<CategoryEntity, CategoryEntity>({
-			query: (post) => ({
-				url: `/${post.id}`,
+		deleteItem: build.mutation<CategoryEntity, CategoryEntity>({
+			query: (item) => ({
+				url: `/${item.id}`,
 				method: 'DELETE',
 			}),
-			invalidatesTags: ['Category'],
+			invalidatesTags: [{ type: 'Category', id: 'LIST' }],
 		}),
 	}),
 });

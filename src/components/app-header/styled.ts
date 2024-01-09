@@ -6,7 +6,7 @@ import { Title } from '@ui-kit/typography/title/title';
 
 import { DropdownButton } from '@ui-kit/buttons/drop-down-button/dropdown-button';
 
-const Wrapper = styled.div((props) => {
+const Wrapper = styled.header((props) => {
 	const {
 		theme: { defaultPadding, appHeader },
 	} = props;
@@ -65,7 +65,7 @@ const BurgerMenuButton = styled(Button)<{ isMenuOpenend: boolean }>`
 	}}
 `;
 
-const MenuWrapper = styled.div<{ isMenuOpenend: boolean }>((props) => {
+const MenuWrapper = styled.nav<{ isMenuOpenend: boolean }>((props) => {
 	const {
 		isMenuOpenend,
 		theme: { defaultPadding, colors, appHeader, size },
