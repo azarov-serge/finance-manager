@@ -3,10 +3,10 @@ import type { FC, PropsWithChildren } from 'react';
 
 import { createPortal } from 'react-dom';
 
-const container = (window.document && document.body) || null;
+const defaultContainer = document.getElementById('portal') as HTMLElement;
 
-export const Portal: FC<PropsWithChildren> = (props) => {
-	const { children } = props;
+export const Portal: FC<PropsWithChildren<{ id?: string }>> = (props) => {
+	const { children, id } = props;
 	const [mounted, setMounted] = React.useState(false);
 
 	React.useEffect(() => {
@@ -16,6 +16,10 @@ export const Portal: FC<PropsWithChildren> = (props) => {
 			setMounted(false);
 		};
 	}, []);
+
+	const container = id
+		? (document.getElementById(id) as HTMLElement)
+		: defaultContainer;
 
 	return mounted ? createPortal(children, container) : null;
 };

@@ -34,6 +34,7 @@ declare module '@emotion/react' {
 			border: Color;
 			text: Color;
 			input: Color;
+			modal: Color;
 		};
 		typography: {
 			text: TextTheme;

@@ -20,7 +20,7 @@ export const DropdownButton: React.FC<DropdownButtonProps> = (props) => {
 
 	return (
 		<div ref={buttonWrapperRef} className={className}>
-			<Button kind="ghost" onClick={toggle}>
+			<Button onClick={toggle}>
 				<Styled.ToggleButton isOpened={isOpened}>
 					{children}
 					<ToggleIcon width="16px" height="16px" />

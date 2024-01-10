@@ -13,11 +13,14 @@ export const categoryApi = createApi({
 			query: (userId) => ({
 				url: `/get-list/${userId}`,
 				method: 'GET',
-				adaptResponse: (respone) =>
+				adaptResponse: (respone: CategoryEntity[]) =>
 					Array.isArray(respone)
 						? respone.map(CategoryEntity.fromJson)
 						: [],
 			}),
+			serializeQueryArgs: (args: { endpointName: string }) => {
+				return args.endpointName;
+			},
 			providesTags: (result) =>
 				result
 					? [
@@ -48,10 +51,11 @@ export const categoryApi = createApi({
 			}),
 			invalidatesTags: [{ type: 'Category', id: 'LIST' }],
 		}),
-		deleteItem: build.mutation<CategoryEntity, CategoryEntity>({
-			query: (item) => ({
-				url: `/${item.id}`,
+		deleteItem: build.mutation<CategoryEntity, { ids: string[] }>({
+			query: (data) => ({
+				url: ``,
 				method: 'DELETE',
+				data,
 			}),
 			invalidatesTags: [{ type: 'Category', id: 'LIST' }],
 		}),

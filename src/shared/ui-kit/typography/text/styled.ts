@@ -13,7 +13,7 @@ const sizeToStyle = {
 };
 
 const Text = styled.span<TextProps>((props) => {
-	const { theme, align, mb, kind, size = 'medium' } = props;
+	const { theme, align = 'left', mb, kind, size = 'medium' } = props;
 
 	const color =
 		!kind || kind === 'normal' ? theme.colors.text : theme.colors[kind];

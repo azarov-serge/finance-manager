@@ -8,7 +8,7 @@ const Wrapper = styled.div<{ isAuth: boolean }>((props) => {
 
 	return `
 		width: 100%;
-		height: calc(100vh - ${appHeader.height}px - ${appFooter.height}px - 10px);
+		min-height: calc(100vh - ${appHeader.height}px - ${appFooter.height}px - 10px);
 		margin-top: 10px;
 		padding: ${defaultPadding};
 

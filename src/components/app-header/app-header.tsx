@@ -149,7 +149,6 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 				</Styled.MenuWrapper>
 
 				<Styled.BurgerMenuButton
-					kind="ghost"
 					isMenuOpenend={isMenuOpenend}
 					onClick={handleMenuClick}
 				>

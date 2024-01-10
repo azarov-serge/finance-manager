@@ -27,7 +27,9 @@ export const useLanguage = (): {
 			return;
 		}
 
-		setLanguage(cachedLanguage);
+		if (language !== cachedLanguage) {
+			setLanguage(cachedLanguage);
+		}
 	}, []);
 
 	return {

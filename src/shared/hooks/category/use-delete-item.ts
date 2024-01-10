@@ -1,27 +1,25 @@
 import { categoryApi } from '@store';
 import { getError } from '@utils/error';
-import { type CategoryEntity } from '@entities';
 
 import { useCallback } from 'react';
 
 export const useDeleteItem = (): {
-	data: CategoryEntity | undefined;
-	deleteItem: (category: CategoryEntity) => Promise<void>;
+	deleteItem: (data: string | string[]) => Promise<void>;
 	isLoading: boolean;
 	error: string;
 } => {
-	const [deleteItem, { data, isLoading, error }] =
+	const [deleteItem, { isLoading, error }] =
 		categoryApi.useDeleteItemMutation();
 
 	const handleDeleteItem = useCallback(
-		async (category: CategoryEntity): Promise<void> => {
-			await deleteItem(category);
+		async (data: string | string[]): Promise<void> => {
+			const ids = Array.isArray(data) ? data : [data];
+			await deleteItem({ ids });
 		},
 		[],
 	);
 
 	return {
-		data,
 		isLoading,
 		deleteItem: handleDeleteItem,
 		error: getError(error),

@@ -97,6 +97,21 @@ export const GlobalStyle: React.FC = () => {
 					box-sizing: border-box;
 					font-family: ${theme.typography.text.fontFamily};
 				}
+
+				*:focus {
+					outline: none;
+					border-color: ${theme.colors.primary};
+				}
+
+				input[type="checkbox" i] {
+					width: 18px;
+					height: 18px;
+					accent-color: ${theme.colors.primary};
+				}
+				
+				input[type="checkbox" i]:not(:checked){
+					opacity:0.5;
+				}
 			`}
 		/>
 	);

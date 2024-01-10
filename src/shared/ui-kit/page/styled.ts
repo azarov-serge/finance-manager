@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 
-const Wrapper = styled.div((props) => {
+const Wrapper = styled.main((props) => {
 	const {
 		theme: { colors, borderRadius },
 	} = props;
