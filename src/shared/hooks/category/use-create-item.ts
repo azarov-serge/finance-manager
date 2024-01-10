@@ -1,13 +1,13 @@
+import { useCallback } from 'react';
 import { categoryApi } from '@store';
-import { getError } from '@utils/error';
+import { getError, isUser } from '@utils';
 import { type CategoryEntity } from '@entities';
 
 import { useUser } from '../user/use-user';
-import { useCallback } from 'react';
 
 export const useCreateItem = (): {
 	data: CategoryEntity | undefined;
-	createItem: (data: { name: string }) => Promise<void>;
+	createItem: (category: CategoryEntity) => Promise<void>;
 	isLoading: boolean;
 	error: string;
 } => {
@@ -17,7 +17,9 @@ export const useCreateItem = (): {
 
 	const handleCreateItem = useCallback(
 		async ({ name }: { name: string }): Promise<void> => {
-			await createItem({ name, userId: user?.id || '' });
+			if (isUser(user)) {
+				await createItem({ name, userId: user.id });
+			}
 		},
 		[user],
 	);

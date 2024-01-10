@@ -19,9 +19,9 @@ export const useUser = (): {
 	}, []);
 
 	useEffect(() => {
-		const user = CookiesManager.getUser();
-		if (user) {
-			setUser(user);
+		const cachedUser = CookiesManager.getUser();
+		if (cachedUser && user === null) {
+			setUser(cachedUser);
 		}
 	}, []);
 

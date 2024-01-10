@@ -6,7 +6,7 @@ import { CookiesManager } from '@utils/cookies-manager';
 
 export const useRefreshToken = (): void => {
 	const { isAuth, setIsAuth } = useIsAuth();
-	const { user, setUser } = useUser();
+	const { user } = useUser();
 
 	const { data, isError } = authApi.useRefreshTokenQuery({
 		userId: user?.id || '',
@@ -28,7 +28,6 @@ export const useRefreshToken = (): void => {
 		CookiesManager.setRefreshToken(data?.tokens.refreshToken || '');
 
 		if (isAuth === null) {
-			setUser(user);
 			setIsAuth(true);
 		}
 	}, [data, isError]);

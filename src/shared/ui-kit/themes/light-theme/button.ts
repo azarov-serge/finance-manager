@@ -4,7 +4,7 @@ import { colors } from './colors';
 
 export const button: Theme['button'] = {
 	primary: colors.primary,
-	secondary: colors.secondary,
+	secondary: 'transparent',
 	danger: colors.danger,
 	caption: {
 		primary: colors.surface,

@@ -10,23 +10,44 @@ const Button = styled.button<StyledButtonProps>((props) => {
 		theme: { colors, button },
 	} = props;
 
-	const isGhhost = kind === 'ghost';
-	const background = kind === 'ghost' ? 'transparent' : button[kind];
+	const color = kind === 'ghost' ? 'transparent' : button[kind];
+
+	const styles: Record<
+		Exclude<StyledButtonProps['kind'], undefined>,
+		string
+	> = {
+		primary: `
+			background: ${color};
+			border-color: ${color};
+		`,
+		secondary: `
+			background: ${color};
+			border-color: ${colors.border};
+		`,
+		ghost: `
+			background: transparent;
+			border-color: transparent;
+		`,
+		danger: `
+			background: transparent;
+			border-color: ${color};
+			color: ${color};
+		`,
+	};
 
 	return `
-		border: 1px solid ${isGhhost ? colors.secondary : background};
-
+		border: 1px solid ${colors.border};
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		height: 30px;
 
 		color: ${colors.text};
-		background: ${background};
 		${mb ? `margin-bottom: ${mb}px;` : ''}
 
 		cursor: pointer;
 		transition: 0.3s;
+		${styles[kind]}
 
 		${wide ? `width: 100%;` : ''}
 	`;

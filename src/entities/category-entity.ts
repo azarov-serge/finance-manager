@@ -30,4 +30,12 @@ export class CategoryEntity implements ICategory {
 			name: json.name,
 		});
 	};
+
+	static createEmpty = (): CategoryEntity => {
+		return new CategoryEntity({
+			id: '',
+			createdAt: new Date(),
+			name: '',
+		});
+	};
 }

@@ -27,7 +27,9 @@ export const useThemeName = (): {
 			return;
 		}
 
-		setThemeName(cachedThemeName);
+		if (cachedThemeName !== themeName) {
+			setThemeName(cachedThemeName);
+		}
 	}, []);
 
 	return {
