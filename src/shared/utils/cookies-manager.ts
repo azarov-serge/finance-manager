@@ -5,7 +5,6 @@ import { type ThemeName } from '@emotion/react';
 import { isObject, isUser } from './type-guards';
 
 const keys = {
-	accessToken: 'accessToken',
 	refreshToken: 'refreshToken',
 	user: 'user',
 	themeName: 'themeName',
@@ -14,14 +13,6 @@ const keys = {
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export class CookiesManager {
-	static setAccessToken = (token: string): void => {
-		Cookies.set(keys.accessToken, token);
-	};
-
-	static getAccessToken = (): string => {
-		return Cookies.get(keys.accessToken) ?? '';
-	};
-
 	static setRefreshToken = (token: string): void => {
 		Cookies.set(keys.refreshToken, token);
 	};

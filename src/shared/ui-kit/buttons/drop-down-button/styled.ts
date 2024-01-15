@@ -13,12 +13,14 @@ const viewAnimation = `
 	}
 `;
 
-const ToggleButton = styled.span<{ isOpened: boolean }>((props) => {
-	const {
-		isOpened,
-		theme: { colors },
-	} = props;
-	return `
+const ToggleButton = styled.span<{ isOpened: boolean; withIcon: boolean }>(
+	(props) => {
+		const {
+			isOpened,
+			withIcon,
+			theme: { colors },
+		} = props;
+		return `
 		display: flex;
 
 		align-items: center;
@@ -29,13 +31,18 @@ const ToggleButton = styled.span<{ isOpened: boolean }>((props) => {
 		border: none;
 		background: transparent;
 
-		> svg {
+		${
+			withIcon
+				? `> svg {
 			margin-left: 5px;
 			color: ${colors.secondary};
 			${isOpened ? 'transform: rotate(180deg);' : ''}
+		}`
+				: ''
 		}
 	`;
-});
+	},
+);
 
 const DropdownButtonWrapper = styled.div<{ isOpened: boolean }>((props) => {
 	const { isOpened } = props;

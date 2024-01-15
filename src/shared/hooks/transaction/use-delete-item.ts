@@ -1,16 +1,15 @@
 import { useCallback } from 'react';
-import { categoryApi } from '@store';
+import { transactionApi } from '@store';
 import { getError } from '@utils/error';
 
 import { type UseDeleteItemReturnType } from '../types';
 
 export const useDeleteItem = (): UseDeleteItemReturnType => {
 	const [deleteItem, { isLoading, error }] =
-		categoryApi.useDeleteItemMutation();
+		transactionApi.useDeleteItemMutation();
 
 	const handleDeleteItem = useCallback(
-		async (data: string | string[]): Promise<void> => {
-			const ids = Array.isArray(data) ? data : [data];
+		async (ids: string[]): Promise<void> => {
 			await deleteItem({ ids });
 		},
 		[],

@@ -1,20 +1,20 @@
 import { useCallback } from 'react';
-import { categoryApi } from '@store';
+import { transactionApi } from '@store';
 import { getError } from '@utils/error';
-import { type CategoryEntity } from '@entities';
+import { type TransactionEntity } from '@entities';
 
 import { type UseUpdateItemReturnType } from '@hooks/types';
 
 export const useUpdateItem = (): UseUpdateItemReturnType<
-	CategoryEntity | undefined,
-	CategoryEntity
+	TransactionEntity | undefined,
+	TransactionEntity
 > => {
 	const [updateItem, { data, isLoading, error }] =
-		categoryApi.useUpdateItemMutation();
+		transactionApi.useUpdateItemMutation();
 
 	const handleUpdateItem = useCallback(
-		async (category: CategoryEntity): Promise<void> => {
-			await updateItem(category);
+		async (transaction: TransactionEntity): Promise<void> => {
+			await updateItem(transaction);
 		},
 		[],
 	);

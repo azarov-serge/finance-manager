@@ -10,4 +10,5 @@ export const colors: Theme['colors'] = {
 	text: '#fff',
 	input: '#333',
 	modal: 'rgba(255, 255, 255, 0.5)',
+	selected: '#e6812b66',
 };

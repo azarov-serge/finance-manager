@@ -23,6 +23,6 @@ declare global {
 		createdAt: Date;
 		name: string;
 		price: number;
-		category: null | ICategory;
+		category: ICategory | null;
 	}
 }

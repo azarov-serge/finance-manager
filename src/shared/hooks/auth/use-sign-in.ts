@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useUser, useIsAuth } from '@hooks';
 import { authApi } from '@store';
-import { getError, CookiesManager } from '@utils';
+import { getError, CookiesManager, SessionStorageManager } from '@utils';
 
 export const useSignIn = (): {
 	isLoading: boolean;
@@ -21,8 +21,8 @@ export const useSignIn = (): {
 			return;
 		}
 
-		// сохраняем новые tokens в cookies
-		CookiesManager.setAccessToken(data.tokens.accessToken || '');
+		// сохраняем новые tokens
+		SessionStorageManager.setAccessToken(data.tokens.accessToken || '');
 		CookiesManager.setRefreshToken(data.tokens.refreshToken || '');
 
 		setUser(data.user);

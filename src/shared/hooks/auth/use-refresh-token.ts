@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useIsAuth, useUser } from '@hooks';
 import { authApi } from '@store';
-import { CookiesManager } from '@utils/cookies-manager';
+import { CookiesManager, SessionStorageManager } from '@utils';
 
 export const useRefreshToken = (): void => {
 	const { isAuth, setIsAuth } = useIsAuth();
@@ -23,8 +23,8 @@ export const useRefreshToken = (): void => {
 			return;
 		}
 
-		// сохраняем новые tokens в cookies
-		CookiesManager.setAccessToken(data?.tokens.accessToken || '');
+		// сохраняем новые token в cookies
+		SessionStorageManager.setAccessToken(data?.tokens.accessToken || '');
 		CookiesManager.setRefreshToken(data?.tokens.refreshToken || '');
 
 		if (isAuth === null) {

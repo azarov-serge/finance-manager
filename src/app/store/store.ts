@@ -4,6 +4,7 @@ import { settingsReducer } from './common/settings/slice';
 
 import { authApi } from './api/auth-api/auth-api';
 import { categoryApi } from './api/category-api/category-api';
+import { transactionApi } from './api/transaction-api/transaction-api';
 
 import { userReducer } from './user/slice';
 
@@ -12,6 +13,7 @@ const reducer = combineReducers({
 	user: userReducer,
 	[authApi.reducerPath]: authApi.reducer,
 	[categoryApi.reducerPath]: categoryApi.reducer,
+	[transactionApi.reducerPath]: transactionApi.reducer,
 });
 
 export const store = configureStore({
@@ -20,7 +22,8 @@ export const store = configureStore({
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({ serializableCheck: false })
 			.concat(authApi.middleware)
-			.concat(categoryApi.middleware),
+			.concat(categoryApi.middleware)
+			.concat(transactionApi.middleware),
 });
 
 export type AppState = ReturnType<typeof reducer>;

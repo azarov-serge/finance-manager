@@ -15,7 +15,9 @@ export const en = {
 		sending: 'Sending',
 		categories: 'Categories',
 		category: 'Category',
-		createdAt: 'Created',
-		name: 'Имя',
+		createdAt: 'Created at',
+		transactions: 'Transactions',
+		transaction: 'Transaction',
+		price: 'Price',
 	},
 };

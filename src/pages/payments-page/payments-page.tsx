@@ -1,25 +1,34 @@
 import React, { useEffect } from 'react';
 import { Styled } from './styled';
-import { useFetchList } from '@hooks/category';
-
+import { useFetchList as useFetchCategoriesList } from '@hooks/category';
+import { useFetchList as useFetchTransactionsList } from '@hooks/transaction';
 import { Spinner } from '@ui-kit/spinner/spinner';
+
 import { Categories } from './components/categories/categories';
+import { Transactions } from './components/transactions/transactions';
 
 export const PaymentsPage: React.FC = () => {
-	const { isLoading, fetchData } = useFetchList();
+	const { isLoading: isCategoriesLoading, fetchData: fetchCategories } =
+		useFetchCategoriesList();
+
+	const {
+		isLoading: isTransactionLoading,
+		fetchData: fetchTransactionsList,
+	} = useFetchTransactionsList();
 
 	useEffect(() => {
-		fetchData();
+		fetchCategories();
+		fetchTransactionsList();
 	}, []);
 
 	return (
 		<Styled.Wrapper>
-			{isLoading ? (
+			{isCategoriesLoading || isTransactionLoading ? (
 				<Spinner />
 			) : (
 				<>
 					<Categories />
-					<Styled.TransactionWrapper></Styled.TransactionWrapper>
+					<Transactions />
 				</>
 			)}
 		</Styled.Wrapper>
