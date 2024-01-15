@@ -58,7 +58,7 @@ export const CategoriesManager: React.FC = () => {
 												});
 											}}
 											onDeleteClick={() => {
-												deleteItem(category.id);
+												deleteItem([category.id]);
 											}}
 										/>
 									) : (

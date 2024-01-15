@@ -6,4 +6,8 @@ export interface DropdownButtonProps
 		HTMLButtonElement
 	> {
 	menu: JSX.Element;
+	withIcon?: boolean;
+	isCloseByItemClick?: boolean;
+	isOpened?: boolean;
+	onMenuClick?: () => void;
 }

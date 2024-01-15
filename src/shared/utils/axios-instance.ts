@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { CookiesManager } from './cookies-manager';
+import { SessionStorageManager } from './session-storage-manager';
 
 export const baseUrl = process.env.URL ?? '';
 
@@ -8,11 +9,11 @@ const REFRESH_TOKEN_URL = '/api/auth/refresh-token';
 export const axiosInstance = axios.create();
 
 // создаем перехватчик запросов
-// который к каждому запросу добавляет accessToken из localStorage
+// который к каждому запросу добавляет accessToken
 axiosInstance.interceptors.request.use((config) => {
 	const token = config.url?.includes(REFRESH_TOKEN_URL)
 		? CookiesManager.getRefreshToken()
-		: CookiesManager.getAccessToken();
+		: SessionStorageManager.getAccessToken();
 
 	if (token) {
 		config.headers.Authorization = `Bearer ${token}`;
@@ -51,8 +52,8 @@ axiosInstance.interceptors.response.use(
 					`${baseUrl}${REFRESH_TOKEN_URL}`,
 				);
 
-				// сохраняем новые tokens в cookies
-				CookiesManager.setAccessToken(
+				// сохраняем новые tokens
+				SessionStorageManager.setAccessToken(
 					response.data?.tokens.accessToken || '',
 				);
 				CookiesManager.setRefreshToken(

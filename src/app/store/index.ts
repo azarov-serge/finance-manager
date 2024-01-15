@@ -3,6 +3,7 @@ export * from './store';
 // #region api
 export * from './api/auth-api/auth-api';
 export * from './api/category-api/category-api';
+export * from './api/transaction-api/transaction-api';
 // #endregion
 
 // #region common

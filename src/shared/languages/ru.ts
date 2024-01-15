@@ -16,5 +16,8 @@ export const ru = {
 		categories: 'Категории',
 		category: 'Категория',
 		createdAt: 'Создан',
+		transactions: 'Транзакции',
+		transaction: 'Транзакция',
+		price: 'Цена',
 	},
 };

@@ -16,7 +16,6 @@ declare module '@emotion/react' {
 		fontFamily: FontFamily;
 		fontSize: FontFamily;
 	}
-
 	export interface Theme {
 		defaultPadding: string;
 		borderRadius: number;
@@ -35,6 +34,7 @@ declare module '@emotion/react' {
 			text: Color;
 			input: Color;
 			modal: Color;
+			selected: Color;
 		};
 		typography: {
 			text: TextTheme;

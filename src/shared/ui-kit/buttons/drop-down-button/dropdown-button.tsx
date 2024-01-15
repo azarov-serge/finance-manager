@@ -9,35 +9,56 @@ import { Styled } from './styled';
 import type { DropdownButtonProps } from './types';
 
 export const DropdownButton: React.FC<DropdownButtonProps> = (props) => {
-	const { menu, className, children } = props;
+	const {
+		menu,
+		className,
+		children,
+		withIcon = true,
+		isCloseByItemClick = true,
+	} = props;
 	const {
 		isOpened,
 		toggle,
+
 		buttonWrapperRef,
 		contentWrapperRef,
 		contentStyle,
 	} = useDropdownButton();
 
+	if (
+		(props.isOpened !== undefined && props.onMenuClick === undefined) ||
+		(props.isOpened === undefined && props.onMenuClick !== undefined)
+	) {
+		throw new Error('Need use isOpened and onMenuClick together');
+	}
+
 	return (
 		<div ref={buttonWrapperRef} className={className}>
-			<Button onClick={toggle}>
-				<Styled.ToggleButton isOpened={isOpened}>
+			<Button onClick={props.onMenuClick ?? toggle}>
+				<Styled.ToggleButton
+					isOpened={props.isOpened ?? isOpened}
+					withIcon={withIcon}
+				>
 					{children}
-					<ToggleIcon width="16px" height="16px" />
+					{withIcon ?? <ToggleIcon width="16px" height="16px" />}
 				</Styled.ToggleButton>
 			</Button>
 
 			<Portal>
 				<Styled.DropdownButtonWrapper
-					isOpened={isOpened}
-					onClick={toggle}
+					isOpened={props.isOpened ?? isOpened}
+					onClick={
+						isCloseByItemClick
+							? props.onMenuClick ?? toggle
+							: undefined
+					}
 				>
 					<Styled.DropdownButtonContentWrapper
-						isOpened={isOpened}
+						isOpened={props.isOpened ?? isOpened}
 						ref={contentWrapperRef}
 						contentStyle={contentStyle}
 					>
-						{isOpened && menu}
+						{(props.isOpened ?? isOpened) && menu}
 					</Styled.DropdownButtonContentWrapper>
 				</Styled.DropdownButtonWrapper>
 			</Portal>
