@@ -1,4 +1,4 @@
-import { isNumber, isObject, isString } from '@utils';
+import { isCategory, isNumber, isObject, isString } from '@utils';
 import { CategoryEntity } from './category-entity';
 
 export class TransactionEntity implements ITransaction {
@@ -9,23 +9,37 @@ export class TransactionEntity implements ITransaction {
 	category: ITransaction['category'];
 
 	constructor(transaction: ITransaction) {
-		this.id = transaction.id;
-		this.createdAt = transaction.createdAt;
-		this.name = transaction.name;
-		this.price = transaction.price;
-		this.category = transaction.category;
+		this.id = transaction.id ?? '';
+		this.createdAt = transaction.createdAt ?? new Date();
+		this.name = transaction.name ?? '';
+		this.price = transaction.price ?? 0;
+		this.category = transaction.category ?? null;
 	}
 
-	toJson = (): Record<string, string> => {
+	toJson = (): Record<string, unknown> => {
 		return {
 			id: this.id,
 			createdAt: this.createdAt.toISOString(),
 			name: this.name,
+			price: this.price,
+			category: isCategory(this.category)
+				? (this.category as CategoryEntity).toJson
+				: null,
 		};
 	};
 
 	copyWith = (transaction: Partial<ITransaction>): TransactionEntity => {
 		return new TransactionEntity({ ...this, ...transaction });
+	};
+
+	static createEmpty = (): TransactionEntity => {
+		return new TransactionEntity({
+			id: '',
+			name: '',
+			createdAt: new Date(),
+			price: 0,
+			category: null,
+		});
 	};
 
 	static fromJson = (
@@ -47,7 +61,10 @@ export class TransactionEntity implements ITransaction {
 			name: isString(json.name)
 				? json.name
 				: 'Error json property: "name"',
-			price: isNumber(json.price) ? json.price : -1,
+			price:
+				isNumber(json.price) || isString(json.price)
+					? Number(json.price)
+					: 0,
 			category,
 		});
 	};

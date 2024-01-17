@@ -9,6 +9,8 @@ export const en = {
 		signIn: 'Sign in',
 		signInTo: 'Sign in to',
 		signUp: 'Sign up',
+		signUpTo: 'Sign up to',
+		signOut: 'Sign out',
 		login: 'Login',
 		password: 'Password',
 		repeatPassword: 'Repeat password',
@@ -19,5 +21,7 @@ export const en = {
 		transactions: 'Transactions',
 		transaction: 'Transaction',
 		price: 'Price',
+		submit: 'Submit',
+		cancel: 'Cancel',
 	},
 };

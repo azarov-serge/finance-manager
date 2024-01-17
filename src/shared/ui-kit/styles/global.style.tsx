@@ -33,6 +33,7 @@ export const GlobalStyle: React.FC = () => {
 					border-radius: ${theme.borderRadius}px;
 				}
 
+				select,
 				input {
 					height: 30px;
 					padding: 4px 8px;

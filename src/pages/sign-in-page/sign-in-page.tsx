@@ -1,11 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '@ui-kit/buttons/button/button';
 import { Title } from '@ui-kit/typography/title/title';
 import { Text } from '@ui-kit/typography/text/text';
 import { LinkButton } from '@ui-kit/buttons/link-button/link-button';
 import LogoIcon from '@assets/icons/logo.inline.svg';
+import { authPaths } from '@router/router';
 
 import { useSignInPage } from './hooks/use-sign-in-page';
 import { Styled } from './styled';
@@ -13,6 +15,7 @@ import { Styled } from './styled';
 export const SignInPage: React.FC = () => {
 	const { t } = useTranslation();
 	const { isLoading, formik, error } = useSignInPage();
+	const navigate = useNavigate();
 
 	return (
 		<Styled.Page>
@@ -54,7 +57,14 @@ export const SignInPage: React.FC = () => {
 
 			{isLoading ? null : (
 				<Styled.Form>
-					<LinkButton kind="primary">{t('signUp')}</LinkButton>
+					<LinkButton
+						kind="primary"
+						onClick={() => {
+							navigate(authPaths.signUp);
+						}}
+					>
+						{t('signUp')}
+					</LinkButton>
 				</Styled.Form>
 			)}
 			<Text kind="danger">{error}</Text>

@@ -14,6 +14,10 @@ const ContentWrapper = styled.div`
 const SettingsButtonWrapper = styled.div`
 	display: flex;
 	justify-content: end;
+
+	button {
+		margin-right: 10px;
+	}
 `;
 
 export const Styled = {

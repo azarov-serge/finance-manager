@@ -34,13 +34,24 @@ export const transactionApi = createApi({
 		}),
 		createItem: build.mutation<
 			TransactionEntity,
-			{ name: string; userId: string }
+			{ transaction: TransactionEntity; userId: string }
 		>({
-			query: (data) => ({
-				url: ``,
-				method: 'POST',
-				data,
-			}),
+			query: ({ userId, transaction }) => {
+				const json = transaction.toJson();
+				delete json.id;
+				delete json.createdAt;
+				delete json.category;
+
+				return {
+					url: ``,
+					method: 'POST',
+					data: {
+						...json,
+						categoryId: transaction.category?.id ?? null,
+						userId,
+					},
+				};
+			},
 			invalidatesTags: [{ type: 'Transaction', id: 'LIST' }],
 		}),
 		updateItem: build.mutation<TransactionEntity, TransactionEntity>({

@@ -1,71 +1,73 @@
 import React from 'react';
-import { Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@ui-kit/buttons/button/button';
+import { useNavigate } from 'react-router-dom';
 
+import { Button } from '@ui-kit/buttons/button/button';
+import { Title } from '@ui-kit/typography/title/title';
+import { Text } from '@ui-kit/typography/text/text';
+import { LinkButton } from '@ui-kit/buttons/link-button/link-button';
+import LogoIcon from '@assets/icons/logo.inline.svg';
+
+import { useSignUpPage } from './hooks/use-sign-up-page';
 import { Styled } from './styled';
+import { authPaths } from '@router/router';
 
 export const SignUpPage: React.FC = () => {
 	const { t } = useTranslation();
+	const { isLoading, formik, error } = useSignUpPage();
+	const navigate = useNavigate();
 
 	return (
 		<Styled.Page>
-			<Formik
-				initialValues={{ login: '', password: '' }}
-				validate={(values) => {
-					const errors: Record<string, string> = {};
+			<Styled.Form onSubmit={formik.handleSubmit}>
+				<LogoIcon width={48} height={48} />
+				<Title align="center">{`${t('signUpTo')} FM`}</Title>
 
-					if (!values.login) {
-						errors.login = 'Required';
-					}
+				<input
+					name="login"
+					required
+					placeholder={t('login')}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					value={formik.values.login}
+					autoComplete="off"
+				/>
 
-					return errors;
-				}}
-				onSubmit={(values, { setSubmitting }) => {
-					setTimeout(() => {
-						alert(JSON.stringify(values, null, 2));
-						setSubmitting(false);
-					}, 400);
-				}}
-			>
-				{({
-					values,
-					errors,
-					touched,
-					handleChange,
-					handleBlur,
-					handleSubmit,
-					isSubmitting,
-					/* and other goodies */
-				}) => (
-					<Styled.Form onSubmit={handleSubmit}>
-						<input
-							name="login"
-							required
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.login}
-						/>
-						{errors.login}
-						<input
-							required
-							type="password"
-							name="password"
-							onChange={handleChange}
-							onBlur={handleBlur}
-							value={values.password}
-						/>
-						{errors.password && touched.password && errors.password}
-						<Button
-							type="submit"
-							kind="primary"
-							disabled={isSubmitting}
-						>
-							Submit
-						</Button>
-					</Styled.Form>
-				)}
-			</Formik>
+				<Styled.Row>
+					<input
+						required
+						type="password"
+						name="password"
+						placeholder={t('password')}
+						onChange={formik.handleChange}
+						onBlur={formik.handleBlur}
+						value={formik.values.password}
+						autoComplete="off"
+					/>
+					<Text kind="danger" size="small">
+						{formik.errors.password &&
+							formik.touched.password &&
+							formik.errors.password}
+					</Text>
+				</Styled.Row>
+				<Button type="submit" kind="primary" disabled={isLoading}>
+					{isLoading ? t('sending') : t('signUp')}
+				</Button>
+			</Styled.Form>
+
+			{isLoading ? null : (
+				<Styled.Form>
+					<LinkButton
+						kind="primary"
+						onClick={() => {
+							navigate(authPaths.signIn);
+						}}
+					>
+						{t('signIn')}
+					</LinkButton>
+				</Styled.Form>
+			)}
+			<Text kind="danger">{error}</Text>
 		</Styled.Page>
 	);
 };
