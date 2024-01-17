@@ -21,6 +21,10 @@ export class CookiesManager {
 		return Cookies.get(keys.refreshToken) ?? '';
 	};
 
+	static deleteRefreshToken = (): void => {
+		Cookies.remove(keys.refreshToken);
+	};
+
 	static setUser = (user: UserEntity | null): void => {
 		if (!isUser(user)) {
 			Cookies.remove(keys.user);

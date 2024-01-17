@@ -44,6 +44,7 @@ axiosInstance.interceptors.response.use(
 		) {
 			try {
 				if (window.location.pathname.includes('/sign-')) {
+					CookiesManager.deleteRefreshToken();
 					throw new Error('');
 				}
 

@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 import LogoIcon from '@assets/icons/logo.inline.svg';
 import BurgerMenuIcon from '@assets/icons/burger-menu.inline.svg';
+import SignOutIcon from '@assets/icons/sign-out.inline.svg';
+import { Button } from '@ui-kit/buttons/button/button';
+import { useSignOut } from '@hooks';
 import { paths } from '@router/router';
 import {
 	THEME_NAMES,
@@ -30,6 +33,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 		handleToogleLanguageClick,
 	} = useAppHeader(props);
 	const { t } = useTranslation();
+	const { signOut } = useSignOut();
 
 	return (
 		<Styled.Wrapper>
@@ -65,6 +69,20 @@ export const AppHeader: React.FC<AppHeaderProps> = (props) => {
 									</Styled.MenuItem>
 								);
 							})}
+							<Styled.MenuItem>
+								<Button
+									onClick={() => {
+										signOut();
+									}}
+								>
+									<SignOutIcon
+										width={16}
+										height={16}
+										style={{ marginRight: '4px' }}
+									/>
+									{t('signOut')}
+								</Button>
+							</Styled.MenuItem>
 						</Styled.Menu>
 					)}
 

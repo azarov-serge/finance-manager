@@ -18,7 +18,7 @@ export const TableContent = <T,>(
 				const key = getRowId(row);
 
 				return (
-					<Tr key={key}>
+					<Tr key={`tr-${key}`}>
 						{columnDefs.map(
 							({ field, cellRenderer, filter, ...rest }) => {
 								let cell: ReturnType<
@@ -35,7 +35,7 @@ export const TableContent = <T,>(
 
 								return (
 									<Styled.Td
-										key={`${key}-${field}`}
+										key={`td-${key}-${field}`}
 										{...rest}
 									>
 										{cell}

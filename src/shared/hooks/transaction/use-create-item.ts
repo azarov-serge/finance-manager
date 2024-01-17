@@ -15,9 +15,9 @@ export const useCreateItem = (): UseCreateItemReturnType<
 		transactionApi.useCreateItemMutation();
 
 	const handleCreateItem = useCallback(
-		async ({ name }: { name: string }): Promise<void> => {
+		async (transaction: TransactionEntity): Promise<void> => {
 			if (isUser(user)) {
-				await createItem({ name, userId: user.id });
+				await createItem({ transaction, userId: user.id });
 			}
 		},
 		[user],

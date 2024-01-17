@@ -1,22 +1,4 @@
 import styled from '@emotion/styled';
-import signUpImg from '@assets/img/robot-hello.img.svg';
-
-const Page = styled.div(() => {
-	return `
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-
-		width: 100%;
-        height: 100%;
-
-		background-image: url(${signUpImg});
-        background-size: 20% auto;
-        background-repeat: no-repeat;
-        background-position:  center left 25%;
-`;
-});
 
 const Form = styled.form((props) => {
 	const {
@@ -54,8 +36,6 @@ const Form = styled.form((props) => {
 
         @media (min-width: ${size.desktopWidth}px) {
             width: 300px;
-
-            margin-left: 25%;
         }
 `;
 });
@@ -63,10 +43,13 @@ const Form = styled.form((props) => {
 const Row = styled.div`
 	height: 55px;
 	text-align: left;
+
+	> select {
+		width: 100%;
+	}
 `;
 
 export const Styled = {
-	Page,
 	Form,
 	Row,
 };

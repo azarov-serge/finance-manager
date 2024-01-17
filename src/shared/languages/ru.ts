@@ -9,6 +9,8 @@ export const ru = {
 		signIn: 'Войти',
 		signInTo: 'Войти в',
 		signUp: 'Зарегистрироваться',
+		signUpTo: 'Зарегистрироваться в',
+		signOut: 'Выйти',
 		login: 'Логин',
 		password: 'Пароль',
 		repeatPassword: 'Повторите пароль',
@@ -19,5 +21,7 @@ export const ru = {
 		transactions: 'Транзакции',
 		transaction: 'Транзакция',
 		price: 'Цена',
+		submit: 'Отправить',
+		cancel: 'Отмена',
 	},
 };
